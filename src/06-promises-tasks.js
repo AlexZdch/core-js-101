@@ -28,8 +28,24 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  return new Promise((resolve, reject) => {
+    if (typeof isPositiveAnswer === 'boolean') {
+      resolve(isPositiveAnswer);
+    } else {
+      reject(new Error('Wrong parameter is passed! Ask her again.'));
+    }
+  })
+    .then((answer) => {
+      let mess = '';
+      if (answer === true) {
+        mess = 'Hooray!!! She said "Yes"!';
+      } else if (answer === false) {
+        mess = 'Oh no, she said "No".';
+      }
+      return mess;
+    });
+//    .catch((error) => error);
 }
 
 
@@ -48,8 +64,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return Promise.all(array);
 }
 
 /**
@@ -71,8 +87,8 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
